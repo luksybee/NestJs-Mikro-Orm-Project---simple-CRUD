@@ -28,19 +28,19 @@ export class UserService {
     }
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll() {
+    return await this.userRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    return await this.userRepository.findOne(id);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+    return this.userRepository.nativeDelete(id);
   }
 }
