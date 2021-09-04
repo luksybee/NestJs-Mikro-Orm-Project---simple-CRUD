@@ -33,11 +33,20 @@ export class UserService {
   }
 
   async findOne(id: number) {
-    return await this.userRepository.findOne(id);
+    try {
+      const user = await this.userRepository.findOneOrFail(id);
+      return user;
+    } catch (error) {
+      throw error;
+    }
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const user = await this.findOne(id);
+
+    user.email = updateUserDto.email;
+
+    await this.userRepository.persistAndFlush(user);
   }
 
   async remove(id: number) {
