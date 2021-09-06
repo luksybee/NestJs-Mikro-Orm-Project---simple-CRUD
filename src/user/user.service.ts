@@ -48,6 +48,8 @@ export class UserService {
     wrap(user).assign(updateUserDto);
 
     await this.userRepository.flush();
+
+    return updateUserDto;
   }
 
   async remove(id: number) {
