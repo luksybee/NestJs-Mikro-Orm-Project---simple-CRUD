@@ -1,3 +1,4 @@
+import { wrap } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -44,9 +45,9 @@ export class UserService {
   async update(id: number, updateUserDto: UpdateUserDto) {
     const user = await this.findOne(id);
 
-    user.email = updateUserDto.email;
+    wrap(user).assign(updateUserDto);
 
-    await this.userRepository.persistAndFlush(user);
+    await this.userRepository.flush();
   }
 
   async remove(id: number) {
