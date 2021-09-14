@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import {
   Property,
   Entity,
@@ -47,4 +48,11 @@ export class User {
     this.password = password;
     this.profile_image = profile_image;
   }
+}
+
+export class UserRepositoryFake {
+  public create(): void {}
+  public async save(): Promise<void> {}
+  public async remove(): Promise<void> {}
+  public async findOne(): Promise<void> {}
 }
